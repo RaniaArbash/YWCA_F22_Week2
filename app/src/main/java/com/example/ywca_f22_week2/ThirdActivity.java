@@ -36,16 +36,16 @@ public class ThirdActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!searchtext.getText().toString().isEmpty()) {
-//                    Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-//                    intent.putExtra(SearchManager.QUERY, searchtext.getText().toString().isEmpty());
-//                    if (intent.resolveActivity(getPackageManager()) != null)
-//                        startActivity(intent);
-
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:" + searchtext.getText().toString().isEmpty()));
-                   // if (intent.resolveActivity(getPackageManager()) != null) {
+                    Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+                    intent.putExtra(SearchManager.QUERY, searchtext.getText().toString().isEmpty());
+                    if (intent.resolveActivity(getPackageManager()) != null)
                         startActivity(intent);
-                    //}
+
+//                    Intent intent = new Intent(Intent.ACTION_DIAL);
+//                    intent.setData(Uri.parse("tel:"+searchtext.getText().toString()));
+//                   // if (intent.resolveActivity(getPackageManager()) != null) {
+//                        startActivity(intent);
+//                    //}
 
 
                 }

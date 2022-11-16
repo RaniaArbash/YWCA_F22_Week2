@@ -4,11 +4,15 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Week2App","On create");
         EditText fav = findViewById(R.id.favalue);
         Button tosecond = findViewById(R.id.tosecond);
-        Button tothird = findViewById(R.id.toThird);
-
         // get the result.
+
+        this.setTitle("Week 2 App");
 
         secondActivityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -70,17 +74,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tothird.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent secondIntent = new Intent(MainActivity.this, ThirdActivity.class);
-                startActivity(secondIntent);
+//
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+       boolean flag = true;
+            switch (item.getItemId()){
+                case R.id.toForthActivity:
+                    Intent intent = new Intent(MainActivity.this, ForthActivity.class);
+                    startActivity(intent);
+                break;
+                case R.id.toThirdActivity:
+                    Intent tintent = new Intent(MainActivity.this, ThirdActivity.class);
+                    startActivity(tintent);
+                    break;
+                case R.id.exit:
+                    finish();
+
             }
-        });
 
-
-
-
+       return flag;
     }
 
     @Override

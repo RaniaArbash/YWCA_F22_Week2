@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">YWCA_F22_Week2</string>
+    <string name="to_forth_activity">To Forth Activity</string>
+    <string name="to_third_activity">To Third Activity</string>
+    <string name="close">Close</string>
 </resources>
