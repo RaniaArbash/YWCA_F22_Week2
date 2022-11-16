@@ -96,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
                     Intent tintent = new Intent(MainActivity.this, ThirdActivity.class);
                     startActivity(tintent);
                     break;
+
+                case R.id.toDonation:
+                    Intent dintent = new Intent(MainActivity.this, DonationActivity.class);
+                    startActivity(dintent);
+                    break;
                 case R.id.exit:
                     finish();
 

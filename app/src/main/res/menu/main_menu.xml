@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:id="@+id/toForthActivity" android:title="@string/to_forth_activity"/>
     <item android:id="@+id/toThirdActivity" android:title="@string/to_third_activity"/>
+    <item android:id="@+id/toDonation" android:title="Donation"/>
     <item android:id="@+id/exit" android:title="@string/close"/>
 
 </menu>
