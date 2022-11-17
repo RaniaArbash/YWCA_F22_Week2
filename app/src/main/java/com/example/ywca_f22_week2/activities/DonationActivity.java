@@ -1,4 +1,4 @@
-package com.example.ywca_f22_week2;
+package com.example.ywca_f22_week2.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
+
+import com.example.ywca_f22_week2.Donation;
+import com.example.ywca_f22_week2.R;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +56,7 @@ public class DonationActivity extends AppCompatActivity {
                     currentDonationObject = new Donation(amount, payment_method , donationTime.toString());
                     ((MyApp)getApplication()).appDonationObject = currentDonationObject;
 
+                    ((MyApp)getApplication()).appDonationList.add(currentDonationObject);
 
 
                     Log.d("Week2App", currentDonationObject.getDonationInfo());
@@ -78,7 +81,7 @@ public class DonationActivity extends AppCompatActivity {
     void showTheAlert(Donation d){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setMessage("Thank You for Your " +d.amount+ " donation.")
+        builder.setMessage("Thank You for Your " +d.getAmount()+ " donation.")
                 .setTitle("All Done!!");
 
         builder.setNegativeButton("OK",null);

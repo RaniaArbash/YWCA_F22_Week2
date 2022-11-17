@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Donation implements Parcelable {
+
+
     double amount;
     int paymentMethod ; // 0 for paypal and 1 for credit card
     String donation_date;
@@ -15,7 +17,7 @@ public class Donation implements Parcelable {
         this.donation_date = donation_date;
     }
 
-    String getDonationInfo(){
+   public String getDonationInfo(){
         String pm = (this.paymentMethod == 0 ? "PayPal": "Credit Card");
         if (this.paymentMethod == -1)
             pm = "No Object";
@@ -50,5 +52,18 @@ public class Donation implements Parcelable {
         parcel.writeDouble(amount);
         parcel.writeInt(paymentMethod);
         parcel.writeString(donation_date);
+    }
+
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public int getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public String getDonation_date() {
+        return donation_date;
     }
 }

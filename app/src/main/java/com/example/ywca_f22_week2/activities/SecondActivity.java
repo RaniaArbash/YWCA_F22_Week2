@@ -1,4 +1,4 @@
-package com.example.ywca_f22_week2;
+package com.example.ywca_f22_week2.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ywca_f22_week2.R;
 
 public class SecondActivity extends AppCompatActivity {
     static int GoodCode = 100;

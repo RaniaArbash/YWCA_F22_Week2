@@ -1,4 +1,4 @@
-package com.example.ywca_f22_week2;
+package com.example.ywca_f22_week2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ywca_f22_week2.R;
 
 public class ForthActivity extends AppCompatActivity {
 
@@ -43,6 +45,7 @@ public class ForthActivity extends AppCompatActivity {
 
         ListView collegeList = findViewById(R.id.list);
         String[] list_collge_names = {"Seneca" , "Humber","Centennial","Niagara","Sherden", "Ottawa"};
+
 
         ArrayAdapter<String> listAdapter = new ArrayAdapter<>(this,
                 R.layout.list_row,

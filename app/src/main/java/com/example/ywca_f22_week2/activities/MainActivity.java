@@ -1,4 +1,4 @@
-package com.example.ywca_f22_week2;
+package com.example.ywca_f22_week2.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.ywca_f22_week2.R;
 
 public class MainActivity extends AppCompatActivity {
     static int GoodCode = 100;
