@@ -1,16 +1,20 @@
 package com.example.ywca_f22_week2.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 
 import com.example.ywca_f22_week2.Donation;
 import com.example.ywca_f22_week2.R;
@@ -24,16 +28,23 @@ public class DonationActivity extends AppCompatActivity {
     RadioButton ccRB;
     EditText amountText;
     Donation currentDonationObject;
-
+    Switch bgSwitch;
+    RelativeLayout layout;
+    int selectedColour = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            selectedColour = savedInstanceState.getInt("bgcolour");
+            layout.setBackgroundColor(selectedColour);
+
+        }
         setContentView(R.layout.activity_donation);
         ppRB = findViewById(R.id.ppRB);
         ccRB = findViewById(R.id.ccRB);
         amountText = findViewById(R.id.amountText);
-
+        layout = findViewById(R.id.roodlayout);
         currentDonationObject = ((MyApp)getApplication()).appDonationObject;
         Log.d("Week2App", currentDonationObject.getDonationInfo());
 
@@ -64,6 +75,24 @@ public class DonationActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        bgSwitch = findViewById(R.id.bgswitch);
+        bgSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bgSwitch.isChecked())// the user need dart mode
+                {
+                    selectedColour = R.color.dark;
+                    layout.setBackgroundColor(getResources().getColor(R.color.dark,null));
+                }
+                    else
+                {
+                    selectedColour = R.color.white;
+                    layout.setBackgroundColor(getResources().getColor(R.color.white,null));
+
+                }
             }
         });
     }
@@ -103,4 +132,12 @@ public class DonationActivity extends AppCompatActivity {
        builder.create().show();
     }
 
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("bgcolour",selectedColour);
+
+    }
 }

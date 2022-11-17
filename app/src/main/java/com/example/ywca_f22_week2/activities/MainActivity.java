@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,18 +17,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import com.example.ywca_f22_week2.R;
 
 public class MainActivity extends AppCompatActivity {
     static int GoodCode = 100;
     static int BadCode = 0;
-
+     int selectedColour = 0;
+    Switch bgSwitch;
+    int value = 100;
+    ConstraintLayout layout;
     ActivityResultLauncher<Intent> secondActivityLauncher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        if (savedInstanceState != null) {
+            layout = findViewById(R.id.root);
+            selectedColour = savedInstanceState.getInt("bgcolour");
+            layout.setBackgroundColor(selectedColour);
+            value = savedInstanceState.getInt("value");
+        }
+
+
+        layout = findViewById(R.id.root);
+
+
+
         Log.d("Week2App","On create");
         EditText fav = findViewById(R.id.favalue);
         Button tosecond = findViewById(R.id.tosecond);
@@ -52,6 +71,26 @@ public class MainActivity extends AppCompatActivity {
                 }
 
         );
+
+        bgSwitch = findViewById(R.id.bgswitch);
+        bgSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bgSwitch.isChecked())// the user need dart mode
+                {
+                    value = 1000;
+                    selectedColour = getResources().getColor(R.color.dark,null);
+                    layout.setBackgroundColor(getResources().getColor(R.color.dark,null));
+                }
+                else
+                {
+                    value = 1000;
+                    selectedColour = getResources().getColor(R.color.white,null);
+                    layout.setBackgroundColor(getResources().getColor(R.color.white,null));
+
+                }
+            }
+        });
 
         tosecond.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +182,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.d("Week2App","On stop");
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("value",value);
+        outState.putInt("bgcolour",selectedColour);
 
     }
 }
