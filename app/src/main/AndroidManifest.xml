@@ -14,8 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YWCA_F22_Week2">
         <activity
+            android:name=".activities.DonationRecyclerList"
+            android:exported="true" />
+        <activity
             android:name=".activities.ReportActivity"
-            android:exported="true" >
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ywca_f22_week2.activities.DonationActivity" />

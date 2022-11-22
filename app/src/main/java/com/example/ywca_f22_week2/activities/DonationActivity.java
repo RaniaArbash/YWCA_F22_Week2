@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -97,7 +100,24 @@ public class DonationActivity extends AppCompatActivity {
         });
     }
 
-    boolean validateUI(){
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.donation_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        boolean flag = true;
+        switch (item.getItemId()) {
+            case R.id.torecycler:
+                Intent i = new Intent(DonationActivity.this,DonationRecyclerList.class);
+                startActivity(i);
+                break;
+        }
+        return flag;
+    }
+            boolean validateUI(){
         boolean valid = false;
         if (!amountText.getText().toString().isEmpty() && (
             ppRB.isChecked() || ccRB.isChecked() ))
