@@ -51,9 +51,8 @@ public class DonationBaseAdapter extends BaseAdapter {
         TextView at = v.findViewById(R.id.row_amount);
         at.setText(String.valueOf(list.get(i).getAmount()));
 
-        String pm = (list.get(i).getPaymentMethod() == 0 ? "PayPal": "Credit Card");
         TextView pmt = v.findViewById(R.id.row_pm);
-        pmt.setText(pm);
+        pmt.setText(list.get(i).getPaymentMethod());
 
         TextView dt = v.findViewById(R.id.row_date);
         dt.setText(list.get(i).getDonation_date());

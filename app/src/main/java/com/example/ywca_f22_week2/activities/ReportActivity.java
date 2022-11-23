@@ -33,9 +33,9 @@ public class ReportActivity extends AppCompatActivity {
 
        // Donation dFromA =  ((MyApp)getApplication()).appDonationObject;
 
-        String pm = (dFromA.getPaymentMethod() == 0 ? "PayPal": "Credit Card");
         msg.setText("Your donation amount is " + dFromA.getAmount() +
-                        "$ and it is completed using " +  pm +  " at : " + dFromA.getDonation_date() );
+                        "$ and it is completed using " +  dFromA.getPaymentMethod() +  " at : " + dFromA.getDonation_date() );
+
 
     }
 }

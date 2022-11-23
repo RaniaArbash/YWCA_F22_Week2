@@ -59,8 +59,8 @@ public class Donation implements Parcelable {
         return amount;
     }
 
-    public int getPaymentMethod() {
-        return paymentMethod;
+    public String getPaymentMethod(){
+        return (this.paymentMethod == 0 ? "PayPal": "Credit Card");
     }
 
     public String getDonation_date() {

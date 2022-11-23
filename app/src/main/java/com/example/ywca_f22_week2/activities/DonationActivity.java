@@ -129,10 +129,8 @@ public class DonationActivity extends AppCompatActivity {
 
     void showTheAlert(Donation d){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
         builder.setMessage("Thank You for Your " +d.getAmount()+ " donation.")
                 .setTitle("All Done!!");
-
         builder.setNegativeButton("OK",null);
 
         builder.setPositiveButton("Show a Report",new DialogInterface.OnClickListener() {
@@ -140,13 +138,7 @@ public class DonationActivity extends AppCompatActivity {
                 // open a report activity
                 Intent toReport = new Intent(DonationActivity.this, ReportActivity.class);
                 toReport.putExtra("donationObject", d);
-
-//                String pm = (d.paymentMethod == 0 ? "PayPal": "Credit Card");
-//                toReport.putExtra("msg","Your donation amount is " + d.amount +
-//                        " and it is completed using " +  pm );
-
                 startActivity(toReport);
-
             }
         });
        builder.create().show();
