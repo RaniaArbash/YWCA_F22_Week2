@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
+import com.example.ywca_f22_week2.DatabaseManager;
 import com.example.ywca_f22_week2.Donation;
 import com.example.ywca_f22_week2.R;
 
@@ -38,6 +39,7 @@ public class DonationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MyApp)getApplication()).databaseManager = new DatabaseManager(this);
         if (savedInstanceState != null) {
             selectedColour = savedInstanceState.getInt("bgcolour");
             layout.setBackgroundColor(selectedColour);
@@ -68,6 +70,12 @@ public class DonationActivity extends AppCompatActivity {
                     Date donationTime = Calendar.getInstance().getTime();
 
                     currentDonationObject = new Donation(amount, payment_method , donationTime.toString());
+
+                    // NO No to access DB from main thread
+                   // ((MyApp)getApplication()).databaseManager.getDB().getDao().insertOneDonation(currentDonationObject);
+
+
+
                     ((MyApp)getApplication()).appDonationObject = currentDonationObject;
 
                     ((MyApp)getApplication()).appDonationList.add(currentDonationObject);
