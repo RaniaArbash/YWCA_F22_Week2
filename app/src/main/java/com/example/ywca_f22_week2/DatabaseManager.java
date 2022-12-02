@@ -11,8 +11,9 @@ import com.example.ywca_f22_week2.activities.MyApp;
 public class DatabaseManager {
 
    public interface DatabaseListener{
-        public void onInsertCompleted();
-        public void onFetchingCompleted(Donation [] list);
+         void onInsertCompleted();
+         void onFetchingCompleted(Donation [] list);
+         void onFetchDonationsWithLimitsCompleted(Donation[] list);
     }
 
    public DatabaseListener listener;
@@ -41,6 +42,7 @@ public class DatabaseManager {
                 @Override
                 public void run() {// run in background thread
                     getDB().getDao().insertOneDonation(d);// task needs time
+
                     handler.post(new Runnable() { // executed in main thread
                         @Override
                         public void run() {
@@ -50,11 +52,11 @@ public class DatabaseManager {
                 }
             });
     }
-    public void getAllDonationsAsync(){
+    public void getAllDonationsAsync() {
         MyApp.executorService.execute(new Runnable() {
             @Override
             public void run() {// run in background thread
-                Donation [] list = getDB().getDao().getAllDonations();
+                Donation[] list = getDB().getDao().getAllDonations();
                 handler.post(new Runnable() { // executed in main thread
                     @Override
                     public void run() {
@@ -63,6 +65,20 @@ public class DatabaseManager {
                 });
             }
         });
+    }
+        public void getDonationsWithLimitsAsync(double limit){
+            MyApp.executorService.execute(new Runnable() {
+                @Override
+                public void run() {// run in background thread
+                    Donation [] list = getDB().getDao().getDonationsWithAmountMoreThan(limit);
+                    handler.post(new Runnable() { // executed in main thread
+                        @Override
+                        public void run() {
+                            listener.onFetchDonationsWithLimitsCompleted(list);
+                        }
+                    });
+                }
+            });
 
 
     }

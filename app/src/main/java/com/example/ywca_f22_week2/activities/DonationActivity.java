@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -80,8 +81,10 @@ public class DonationActivity
 
                     // NO No to access DB from main thread
                    // ((MyApp)getApplication()).databaseManager.getDB().getDao().insertOneDonation(currentDonationObject);
+
                     ((MyApp)getApplication()).databaseManager.insertNewDonationAsync(currentDonationObject);
                     ((MyApp)getApplication()).appDonationObject = currentDonationObject;
+
 
                        }
 
@@ -173,5 +176,10 @@ public class DonationActivity
     public void onFetchingCompleted(Donation[] list) {
         ((MyApp)getApplication()).appDonationList = new ArrayList<Donation>(Arrays.asList(list));
 
+    }
+
+    @Override
+    public void onFetchDonationsWithLimitsCompleted(Donation[] list) {
+        // list of donations with limits
     }
 }

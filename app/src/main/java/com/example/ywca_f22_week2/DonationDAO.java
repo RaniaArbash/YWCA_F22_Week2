@@ -20,7 +20,7 @@ public interface DonationDAO {
     @Query("select * from Donation") // compile time checking
     Donation[] getAllDonations();
 
-    @Query("select * from Donation where amount > :a")
+    @Query("select * from Donation where amount >= :a")
     Donation[] getDonationsWithAmountMoreThan(double a);
 
     @Query("select * from Donation where pm == :pm")
