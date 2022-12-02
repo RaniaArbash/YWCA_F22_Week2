@@ -18,15 +18,20 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.ywca_f22_week2.DatabaseManager;
 import com.example.ywca_f22_week2.Donation;
 import com.example.ywca_f22_week2.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DonationActivity extends AppCompatActivity {
+public class DonationActivity
+        extends AppCompatActivity
+        implements DatabaseManager.DatabaseListener{
 
     RadioButton ppRB;
     RadioButton ccRB;
@@ -40,6 +45,8 @@ public class DonationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((MyApp)getApplication()).databaseManager = new DatabaseManager(this);
+        ((MyApp)getApplication()).databaseManager.listener = this;
+        ((MyApp)getApplication()).databaseManager.getAllDonationsAsync();
         if (savedInstanceState != null) {
             selectedColour = savedInstanceState.getInt("bgcolour");
             layout.setBackgroundColor(selectedColour);
@@ -73,17 +80,10 @@ public class DonationActivity extends AppCompatActivity {
 
                     // NO No to access DB from main thread
                    // ((MyApp)getApplication()).databaseManager.getDB().getDao().insertOneDonation(currentDonationObject);
-
-
-
+                    ((MyApp)getApplication()).databaseManager.insertNewDonationAsync(currentDonationObject);
                     ((MyApp)getApplication()).appDonationObject = currentDonationObject;
 
-                    ((MyApp)getApplication()).appDonationList.add(currentDonationObject);
-
-
-                    Log.d("Week2App", currentDonationObject.getDonationInfo());
-                    showTheAlert(currentDonationObject);
-                }
+                       }
 
 
             }
@@ -138,7 +138,7 @@ public class DonationActivity extends AppCompatActivity {
     void showTheAlert(Donation d){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Thank You for Your " +d.getAmount()+ " donation.")
-                .setTitle("All Done!!");
+                .setTitle("Donation is saved!");
         builder.setNegativeButton("OK",null);
 
         builder.setPositiveButton("Show a Report",new DialogInterface.OnClickListener() {
@@ -158,6 +158,20 @@ public class DonationActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putInt("bgcolour",selectedColour);
+
+    }
+
+    @Override
+    public void onInsertCompleted() {
+        // fetch all donations from db to update the list
+        ((MyApp)getApplication()).databaseManager.getAllDonationsAsync();
+        showTheAlert(currentDonationObject);
+
+    }
+
+    @Override
+    public void onFetchingCompleted(Donation[] list) {
+        ((MyApp)getApplication()).appDonationList = new ArrayList<Donation>(Arrays.asList(list));
 
     }
 }

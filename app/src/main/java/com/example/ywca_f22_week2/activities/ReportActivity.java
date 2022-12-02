@@ -20,7 +20,8 @@ public class ReportActivity extends AppCompatActivity {
         TextView msg = findViewById(R.id.reportText);
         donationList = findViewById(R.id.donationsList);
 
-        DonationBaseAdapter adapter = new DonationBaseAdapter(((MyApp)getApplication()).appDonationList,
+        DonationBaseAdapter adapter =
+                new DonationBaseAdapter(((MyApp)getApplication()).appDonationList,
                 ReportActivity.this);
         donationList.setAdapter(adapter);
 

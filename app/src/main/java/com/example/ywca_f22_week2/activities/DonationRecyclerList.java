@@ -21,7 +21,8 @@ public class DonationRecyclerList extends AppCompatActivity
         setContentView(R.layout.activity_donation_recycler_list);
 
         RecyclerView list = findViewById(R.id.donationRecyclerList);
-        DonationListAdapter adapter = new DonationListAdapter(this, ((MyApp)getApplication()).appDonationList);
+        DonationListAdapter adapter = new DonationListAdapter(this,
+                ((MyApp)getApplication()).appDonationList);
         adapter.listener = this;
         list.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(this);
